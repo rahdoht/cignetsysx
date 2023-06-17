@@ -30,22 +30,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <Annoucement />
-      <Box
-        display="flex"
-        flexDir="column"
-        justifyContent="center"
-        alignItems="center"
-        w="100%"
-      >
-        <Box display="flex" alignItems="center" flexDir="column" w="100%">
-          <Heading fontSize="3vh" margin="20px">
-            STAMPS
-          </Heading>
+      <div style={{ marginBottom: "100px" }}>
+        <Box
+          display="flex"
+          flexDir="column"
+          justifyContent="center"
+          alignItems="center"
+          w="100%"
+        >
+          <Box display="flex" alignItems="center" flexDir="column" w="100%">
+            <Heading fontSize="3vh" margin="20px">
+              STAMPS
+            </Heading>
+          </Box>
+          <Box width="100%" height={400} my={5} maxW="800px">
+            <Stamp />
+          </Box>
         </Box>
-        <Box width="100%" height={400} my={5} maxW="800px">
-          <Stamp />
-        </Box>
-      </Box>
+      </div>
       <Flex
         w="100%"
         justifyContent="center"
