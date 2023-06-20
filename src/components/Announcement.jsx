@@ -16,10 +16,15 @@ import { createClient } from '@supabase/supabase-js'
 
 import { useEffect, useState } from 'react'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_ROLE,
-)
+let supabase_exists =
+  process.env.NEXT_PUBLIC_SUPABASE_URL &&
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_ROLE;
+if (supabase_exists) {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_ROLE,
+  );
+}
 
 export const Annoucement = ({ refresh, setRefresh }) => {
   const [show, setShow] = useState(true)
@@ -27,12 +32,20 @@ export const Annoucement = ({ refresh, setRefresh }) => {
   const [author, setAuthor] = useState(null)
 
   async function getAnounceData() {
-    const { data } = await supabase
-      .from('announcements')
-      .select('*')
-      .order('id', { ascending: false })
-      .limit(1)
-      .single()
+    let data = {
+        annoucement: "hi",
+        author: "auteur",
+      };
+
+    if (supabase_exists) {
+      const { queryData } = await supabase
+        .from("announcements")
+        .select("*")
+        .order("id", { ascending: false })
+        .limit(1)
+        .single();
+      data = queryData;
+    }
 
     setAnnoucement(data['announcement'])
     if (data['author']) {

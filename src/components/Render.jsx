@@ -95,11 +95,6 @@ const addRandomImageEffect = async (imageDataURI, shouldFilter) => {
   return { effect: randomEffect.name, data: imageData }
 }
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_ROLE,
-)
-
 export const RenderComponent = ({ setUserDidRender }) => {
   const [textToRender, setTextToRender] = useState('')
   const [dataURI, setDataURI] = useState('')
